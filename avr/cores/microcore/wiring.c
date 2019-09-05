@@ -24,7 +24,11 @@ timers.
 #ifdef ENABLE_MILLIS
 uint32_t millis()
 {  
-  return wdt_interrupt_counter;
+  uint32_t m;
+  cli();
+  m = wdt_interrupt_counter;
+  sei();
+  return m;
 }
 #endif // ENABLE_MILLIS
 
